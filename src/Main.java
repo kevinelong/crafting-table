@@ -1,24 +1,17 @@
 import java.util.*;
 
 public class Main {
-    static HashMap<String,String> recipes = new HashMap<>();
+    static HashMap<Set<String>,String> recipes = new HashMap<>();
     public static void main(String[] args) {
-        recipes.put("icecream-chocolate-cherry", "SUNDAY");
-        recipes.put("icecream-banana-pineapple", "BANANA-SPLIT");
-
-        List<String> items = List.of("icecream", "chocolate", "cherry");
-        System.out.println(craftThing(items));
-
-        List<String> items2 = List.of("ice", "chocolate", "cherry");
-        System.out.println(craftThing(items2));
-
+        recipes.put(Set.of("icecream", "cherry", "chocolate"), "SUNDAY");
+        recipes.put(Set.of("icecream", "banana", "pineapple"), "BANANA-SPLIT");
+        System.out.println(craftThing(Set.of("icecream", "chocolate", "cherry")));
+        System.out.println(craftThing(Set.of("ice", "chocolate", "cherry")));
     }
 
-    static String craftThing(List<String> list) {
-        String mashed = String.join("-", list);
-        System.out.println(mashed);
-        if(recipes.containsKey(mashed)){
-            return recipes.get(mashed);
+    static String craftThing(Set<String> list) {
+        if(recipes.containsKey(list)){
+            return recipes.get(list);
         }
         return "NOPE";
     }
